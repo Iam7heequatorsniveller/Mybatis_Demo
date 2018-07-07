@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 是用resource属性加载外部配置文件 -->
+    <properties resource="db.properties">
+        <!-- 在properties内部用property定义属性 -->
+        <!-- 如果外部配置文件有该属性，则内部定义属性被外部属性覆盖 -->
+        <property name="jdbc.username" value="root123"/>
+        <property name="jdbc.password" value="root123"/>
+    </properties>
+
+    <!--定义别名-->
+    <typeAliases>
+        <package name="com.itheima.mybatis.pojo"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <!-- 使用jdbc事务管理 -->
+            <transactionManager type="JDBC"/>
+            <!-- 数据库连接池 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+
+        </environment>
+    </environments>
+    <!--加载映射文件-->
+    <mappers>
+        <!--<mapper resource="sqlmap/UserMapper.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>-->
+        <package name="com.itheima.mybatis.dao"/>
+    </mappers>
+</configuration>
